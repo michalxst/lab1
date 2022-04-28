@@ -107,12 +107,12 @@ int main()
 	int ntab[5] = {10000, 50000, 100000, 500000, 1000000}; //rozmiary tablic
 	double percenttab[8] = {0, 25, 50, 75, 95, 99, 99.7, 100}; //procent posortowanych elementow, 100 oznacza tablice posortowana od tylu
 
-	SortFncPoint<DataType> mpoint= &scalanieWrap, qpoint = &quickWrap, ipoint = &introWrap; //wskazniki na funkcje sort
+	SortFncPoint<DataType> mpoint= &mergeWrap, qpoint = &quickWrap, ipoint = &introWrap; //wskazniki na funkcje sort
     SortFncPoint<DataType> ptable[3] = {qpoint, mpoint, ipoint};
 
 	double counter = 0;
 	int iter = 0;
-	std::string sorts[3] = {"QUCIK_SORT", "scalanie_SORT", "INTRO_SORT"};
+	std::string sorts[3] = {"QUCIK_SORT", "MERGE_SORT", "INTRO_SORT"};
 
     for(SortFncPoint<DataType> fp : ptable) //dla kazdej funkcji sortujacej
     {

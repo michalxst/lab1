@@ -5,7 +5,7 @@
 
 
 template<typename T>
-void scalanie(T *tab, T *tmp, int left, int midd, int right)
+void merge(T *tab, T *tmp, int left, int midd, int right)
 {
 	// lewa i prawa czesc w tablicy pomocniczej
 	for (int i = left; i <= right; i++) tmp[i] = tab[i];
@@ -24,24 +24,24 @@ void scalanie(T *tab, T *tmp, int left, int midd, int right)
 
 
 template<typename T>
-void scalaniesort(T *tab, T *tmp, int left, int right)
+void mergesort(T *tab, T *tmp, int left, int right)
 {
 	if (left < right) 
 	{
 		int midd = (left + right) / 2;  //srodek tablicy
 		// podzial na lewa i prawa 
-		scalaniesort(tab, tmp, left, midd);
-		scalaniesort(tab, tmp, midd + 1, right);
-		scalenie dwoch posrotowanych
-		scalanie(tab, tmp, left, midd, right);
+		mergesort(tab, tmp, left, midd);
+		mergesort(tab, tmp, midd + 1, right);
+		//scalenie dwoch posrotowanych
+		merge(tab, tmp, left, midd, right);
 	}
 }
 
 
 template<typename T>
-void scalanieWrap(T *tab, T *tmp, int left, int right, int maxdepth)
+void mergeWrap(T *tab, T *tmp, int left, int right, int maxdepth)
 {
-    scalaniesort(tab, tmp, left, right);
+    mergesort(tab, tmp, left, right);
 }
 
 
@@ -139,9 +139,9 @@ void introWrap(T *tab, T *tmp, int left, int right, int maxdepth)
 
 
 template void introWrap<int>(int*, int*, int, int, int);
-template void scalanieWrap<int>(int*, int*, int, int, int);
+template void mergeWrap<int>(int*, int*, int, int, int);
 template void quickWrap<int>(int*, int*, int, int, int);
 
 template void introWrap<double>(double*, double*, int, int, int);
-template void scalanieWrap<double>(double*, double*, int, int, int);
+template void mergeWrap<double>(double*, double*, int, int, int);
 template void quickWrap<double>(double*, double*, int, int, int);
