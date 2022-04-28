@@ -29,10 +29,10 @@ void mergesort(T *tab, T *tmp, int left, int right)
 	if (left < right) 
 	{
 		int midd = (left + right) / 2;  //srodek tablicy
-		// podzial na lewa i prawa 
+		// podzial na tablice lewa i prawa 
 		mergesort(tab, tmp, left, midd);
 		mergesort(tab, tmp, midd + 1, right);
-		//scalenie dwoch posrotowanych
+		//scalenie dwoch posrotowanych tablic
 		merge(tab, tmp, left, midd, right);
 	}
 }
@@ -49,7 +49,7 @@ void mergeWrap(T *tab, T *tmp, int left, int right, int maxdepth)
 template<typename T>
 int partition(T *tab, int left, int right)
 {
-    int pivot = tab[(left + right) / 2], i = left, j = right; //pivot zawsze na srodku
+    int pivot = tab[(left + right) / 2], i = left, j = right; //punkt odniesienia zawsze na srodku
 // szukanie elementu wiekszego od pivot po prawej stronie
 // lub mniejszego po lewej
     while (true)
@@ -91,15 +91,15 @@ void insertionsort(T *tab, int left, int right)
 {
 	for (int i = left + 1; i <= right; i++)
 	{
-		int key = tab[i];
+		int key = tab[i]; //ten element zostanie wstawiony w odpowiednie miejsce
 		int j = i;
 
 		while (j > left && tab[j - 1] > key)
         {
-            tab[j] = tab[j - 1];
+            tab[j] = tab[j - 1]; //przesuwanie elementu
             j--;
         }
-		tab[j] = key;
+		tab[j] = key;  //key w odpowiednie miejsce
 	}
 }
 
@@ -118,11 +118,11 @@ void heapsort(T *left, T *right)
 
 
 template<typename T>
-void introsort(T *tab, T *left, T *right, int maxdepth)
+void introsort(T *tab, T *left, T *right, int maxdepth) 
 {
-	if ((right - left) < 16) insertionsort(tab, left - tab, right - tab);
-	else if (maxdepth == 0) heapsort(left, right + 1);
-	else
+	if ((right - left) < 16) insertionsort(tab, left - tab, right - tab); // jeżeli rozmiar partycji mniejszy niż 16 wykonuje insertionsort
+	else if (maxdepth == 0) heapsort(left, right + 1); //jeżeli maxdepth jest 0  przeprowadz kopcowanie
+	else //w innym przypadku znajdź pivot i quciksort
     {
 		int pivot = partition(tab, left - tab, right - tab);
 		introsort(tab, left, tab + pivot, maxdepth - 1);
